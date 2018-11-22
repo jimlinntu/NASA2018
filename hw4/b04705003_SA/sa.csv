@@ -1,0 +1,34 @@
+id,answer
+1,virt-install
+2,qemu-kvm
+3,libvirt
+4,start libvirtd
+5,vmx
+6,/proc/cpuinfo
+7,svm
+8,/proc/cpuinfo
+9,usermod -a -G libvirt
+10,add ifname nm-bridge1 type bridge
+11,add type bridge-slave
+12,master nm-bridge1
+13,bridge1 ipv4.method auto
+14,down em1
+15,up bridge1
+16,qemu-img
+17,-f qcow2
+18,--bootproto=dhcp
+19,serial-getty@ttyS0.service
+20,--disk path=/var/lib/libvirt/images/hw4.qcow2
+21,--graphics spice,password=pwd
+22,--location /var/lib/libvirt/images/CentOS-7-x86_64-Minimal-1708.iso
+23,--network bridge=nm-bridge1
+24,--initrd-inject /root/hw4-anaconda.cfg
+25,--extra-args="ks=file:/hw4-anaconda.cfg console=tty0 console=ttyS0,115200n8 serial"
+26,virsh list
+27,virsh destroy vm-hw4
+28,virsh shutdown vm-hw4
+29,virsh undefine vm-hw4
+30,"virsh domiflist vm-hw4" or "virsh domstats vm-hw4 --interface | grep 'name' | cut -d'=' -f2"
+31,virsh detach-interface vm-hw4 <type> [--mac mac_of_interface]
+32,virsh edit vm-hw4
+33,virsh console vm-hw4
